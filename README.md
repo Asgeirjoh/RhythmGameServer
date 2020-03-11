@@ -10,5 +10,5 @@ Install MongoDB:
 https://www.mongodb.com/download-center/community
 
 ### Install node packages express & mongodb from terminal:
-npm install express
+npm install express \n
 npm install mongodb
