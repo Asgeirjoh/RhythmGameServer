@@ -13,6 +13,6 @@ How To Install MongoDB On MacOS: https://www.youtube.com/watch?v=bPFy8n53gsE
 npm install express <br>
 npm install mongodb
 
-## Run app.js:
-go to file location in terminal, type in:
-node. app.js
+## Run Server:
+Go to app.js file location in terminal, type in:
+node app.js to run the server.
