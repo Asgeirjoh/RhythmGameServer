@@ -15,4 +15,4 @@ npm install mongodb
 
 ## Run Server:
 Go to app.js file location in terminal, type in:
-node app.js to run the server.
+node app.js
