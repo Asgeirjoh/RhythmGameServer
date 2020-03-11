@@ -14,5 +14,5 @@ npm install express <br>
 npm install mongodb
 
 ## Run Server:
-Go to app.js file location in terminal, type in:
+Go to app.js file location in terminal, type in: <br>
 node app.js
