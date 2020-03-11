@@ -16,3 +16,6 @@ npm install mongodb
 ## Run Server:
 Go to app.js file location in terminal, type in: <br>
 node app.js
+
+## Android App:
+https://github.com/Asgeirjoh/RhythmGame/tree/master
