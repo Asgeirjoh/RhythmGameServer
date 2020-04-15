@@ -25,8 +25,14 @@ mongoClient.connect(url, (err, db) => {
 
         const myDb = db.db('myDb')
         const collection = myDb.collection('myTable')
+<<<<<<< HEAD
         var sess
 
+=======
+        
+        // Signup post-request
+        // Saves name,email and password in database
+>>>>>>> ee4c6d6875c1953c803645753d56f5e969dbd117
         app.post('/signup', (req, res) => {
 
             const newUser = {
@@ -51,6 +57,8 @@ mongoClient.connect(url, (err, db) => {
 
         })
 
+        // Login post-request
+        // Checks if name and password is in database(login)
         app.post('/login', (req, res) => {
 
             const query = {
