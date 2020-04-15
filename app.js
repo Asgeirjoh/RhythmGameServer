@@ -1,11 +1,21 @@
 const express = require('express')
 const app = express()
 const mongoClient = require('mongodb').MongoClient
+const session = require('express-session')
 
 const url = "mongodb://localhost:27017"
 
 app.use(express.json())
 
+app.use(session({
+	secret: 'secret boya',
+	resave: true,
+	saveUninitialized: true
+}))
+/*
+app.use(bodyParser.urlencoded({extended : true}))
+app.use(bodyParser.json())
+*/
 
 mongoClient.connect(url, (err, db) => {
 
@@ -15,6 +25,7 @@ mongoClient.connect(url, (err, db) => {
 
         const myDb = db.db('myDb')
         const collection = myDb.collection('myTable')
+        var sess
 
         app.post('/signup', (req, res) => {
 
@@ -50,7 +61,10 @@ mongoClient.connect(url, (err, db) => {
             collection.findOne(query, (err, result) => {
 
                 if (result != null) {
-
+                    sess = req.session
+                    sess.username = result.name
+                    sess.loggedin = true
+                    
                     const objToSend = {
                         name: result.name,
                         email: result.email
@@ -66,6 +80,27 @@ mongoClient.connect(url, (err, db) => {
 
         })
 
+        app.get('/logout', (req, res) => {
+            sess.username = null
+            sess.loggedin = false
+            res.status(200).send()
+            console.log("logged out")
+        })
+
+        app.get('/usercheck', (req, res) => {
+            if (typeof sess !== 'undefined') {
+                if (sess.loggedin) {
+                    res.status(200).send()
+                    console.log("user logged in")
+                }
+                else {
+                    console.log("user logged out")
+                }
+            }
+            else {
+                console.log("user logged out")
+            }
+        })
     }
 
 })
