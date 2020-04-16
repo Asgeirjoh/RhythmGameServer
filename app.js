@@ -25,14 +25,11 @@ mongoClient.connect(url, (err, db) => {
 
         const myDb = db.db('myDb')
         const collection = myDb.collection('myTable')
-<<<<<<< HEAD
         var sess
 
-=======
         
         // Signup post-request
         // Saves name,email and password in database
->>>>>>> ee4c6d6875c1953c803645753d56f5e969dbd117
         app.post('/signup', (req, res) => {
 
             const newUser = {
@@ -108,6 +105,47 @@ mongoClient.connect(url, (err, db) => {
             else {
                 console.log("user logged out")
             }
+        })
+
+        app.post('/savescore', (req, res) => {
+            const newSavedScore = {
+                name: req.body.name,
+                userName: req.body.userName,
+                score: req.body.score,
+                date: req.body.date
+            }
+
+            collection.insertOne(newSavedScore, (err, result) => {
+                res.status(200).send()
+                console.log(newSavedScore)
+            })
+        })
+
+        app.post('/getscore', (req, res) => {
+            const query = {
+                name: req.body.name
+            }
+
+            collection.find((err, result) => {
+            //collection.find(query, (err, result) => {    
+
+                if (result != null) {
+                    
+                    const objToSend = {
+                        name: result.name,
+                        userName: result.userName,
+                        score: result.score,
+                        date: result.date
+                    }
+
+                    res.status(200).send(JSON.stringify(objToSend))
+                    console.log("score found")
+
+                } else {
+                    res.status(404).send()
+                    console.log("score not found")
+                }
+            })
         })
     }
 
